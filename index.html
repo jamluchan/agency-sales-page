@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Growth Agency | Turn Clicks Into Customers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .nav-cta {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 20px;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.5);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+        .stat { text-align: center; }
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .problem {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        .section-tag {
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .problem-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-left: 4px solid #ef4444;
+        }
+        .problem-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        .problem-card p {
+            color: var(--gray);
+            font-size: 15px;
+        }
+        .solution {
+            padding: 100px 0;
+        }
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+        .service-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        .service-features {
+            list-style: none;
+        }
+        .service-features li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            font-size: 14px;
+            color: var(--dark);
+        }
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+        .ai-highlight {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: white;
+            padding: 80px 0;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .ai-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .ai-text h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        .ai-text h2 span {
+            color: var(--secondary);
+        }
+        .ai-text p {
+            color: #94a3b8;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .ai-platforms {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .ai-badge {
+            background: rgba(6, 182, 212, 0.2);
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .vsl-section {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        .vsl-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .vsl-box {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        .vsl-placeholder {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            border-radius: 16px;
+            aspect-ratio: 16/9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .play-button {
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.5);
+        }
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.6);
+        }
+        .testimonials {
+            padding: 100px 0;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+        .testimonial-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        .stars {
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .testimonial-text {
+            font-size: 16px;
+            color: var(--dark);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .author-avatar {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        .author-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .author-info p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        .pricing {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .pricing-card {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        .pricing-card.featured {
+            border: 3px solid var(--primary);
+            transform: scale(1.05);
+        }
+        .featured-badge {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .pricing-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .pricing-card .subtitle {
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+        .price {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+        .price span {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--gray);
+        }
+        .pricing-features {
+            list-style: none;
+            margin: 32px 0;
+        }
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+        }
+        .pricing-cta {
+            display: block;
+            text-align: center;
+            padding: 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .pricing-card:not(.featured) .pricing-cta {
+            background: var(--light);
+            color: var(--dark);
+        }
+        .pricing-card.featured .pricing-cta {
+            background: var(--primary);
+            color: white;
+        }
+        .pricing-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        .cta-section p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-button {
+            background: white;
+            color: var(--primary);
+            padding: 20px 48px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 18px;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-section h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            transition: color 0.3s;
+        }
+        .footer-section a:hover {
+            color: white;
+        }
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 30px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+        @media (max-width: 768px) {
+            .hero-stats { gap: 30px; }
+            .ai-content { grid-template-columns: 1fr; }
+            .pricing-card.featured { transform: none; }
+            .vsl-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">⚡ Growth Agency</div>
+                <a href="#contact" class="nav-cta">Get Free Audit</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">🚀 Now Including AI Search Optimization</div>
+                <h1>We Turn <span>Local Businesses</span> Into Local Legends</h1>
+                <p class="hero-subtitle">Websites that convert. SEO that dominates. AI search visibility. Paid ads that profit. Content that captivates. Everything your business needs to win online.</p>
+                <div class="hero-cta-group">
+                    <a href="#contact" class="btn-primary">Get Your Free Growth Audit →</a>
+                    <a href="#vsl" class="btn-secondary">Watch How It Works</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Local Businesses</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">10M+</div>
+                        <div class="stat-label">Leads Generated</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">340%</div>
+                        <div class="stat-label">Avg. ROI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">The Problem</p>
+                <h2 class="section-title">Sound Familiar?</h2>
+                <p style="color: var(--gray);">Most local businesses struggle with the same challenges. You're not alone.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>🌐 Your Website Is a Digital Brochure</h3>
+                    <p>It looks nice but doesn't convert visitors into customers. No clear calls-to-action, slow loading, mobile-unfriendly.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>🔍 Invisible on Google</h3>
+                    <p>Your competitors show up first. You're buried on page 3. Potential customers can't find you when they need you.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>📍 Google Maps? What Google Maps?</h3>
+                    <p>Your Google Business Profile is unclaimed or neglected. You're missing the #1 source of local discovery traffic.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>🤖 Missing the AI Revolution</h3>
+                    <p>While you focus on traditional SEO, customers are asking ChatGPT and Perplexity for recommendations. You're not in those answers.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>💸 Ads That Burn Cash</h3>
+                    <p>You've tried Facebook or Google Ads. Spent money. Got clicks. But no customers. No system, no strategy, no results.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>📱 Content? What Content?</h3>
+                    <p>No videos, no articles, no newsletters. Your competitors are everywhere. You're invisible on social media.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">Our Services</p>
+                <h2 class="section-title">Everything You Need to Dominate Your Market</h2>
+                <p style="color: var(--gray);">A complete growth system designed specifically for local businesses.</p>
+            </div>
+            <div class="solution-grid">
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Website Development</h3>
+                    <p>High-converting websites built to turn visitors into customers. Mobile-first, lightning-fast, SEO-ready.</p>
+                    <ul class="service-features">
+                        <li>Custom design & development</li>
+                        <li>Conversion-optimized layouts</li>
+                        <li>Mobile-responsive design</li>
+                        <li>Fast loading speeds</li>
+                        <li>Integration with your tools</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Search Engine Optimization</h3>
+                    <p>Dominate Google search results. Technical SEO, content strategy, and link building that actually works.</p>
+                    <ul class="service-features">
+                        <li>Technical SEO audit & fixes</li>
+                        <li>Keyword research & strategy</li>
+                        <li>On-page optimization</li>
+                        <li>Local SEO focus</li>
+                        <li>Monthly reporting</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📍</div>
+                    <h3>Google Maps Optimization</h3>
+                    <p>Own the local map pack. Optimize your Google Business Profile to capture high-intent local searches.</p>
+                    <ul class="service-features">
+                        <li>Profile optimization</li>
+                        <li>Review generation system</li>
+                        <li>Local citation building</li>
+                        <li>Post & photo management</li>
+                        <li>Competitor analysis</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3>GAI: Generative AI Search</h3>
+                    <p>Be the business ChatGPT, Claude, and Perplexity recommend. The future of search is AI—be there.</p>
+                    <ul class="service-features">
+                        <li>AI search visibility audit</li>
+                        <li>Structured data optimization</li>
+                        <li>Authority building for AI</li>
+                        <li>Content optimization</li>
+                        <li>AI recommendation tracking</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Agentic AI Solutions</h3>
+                    <p>Deploy AI agents that work 24/7. Customer service, lead qualification, appointment booking—automated.</p>
+                    <ul class="service-features">
+                        <li>AI chatbot deployment</li>
+                        <li>Lead qualification agents</li>
+                        <li>Appointment scheduling AI</li>
+                        <li>Customer support automation</li>
+                        <li>Integration with your CRM</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Content Management</h3>
+                    <p>Video, articles, newsletters—we create content that builds authority and drives traffic.</p>
+                    <ul class="service-features">
+                        <li>Professional videography</li>
+                        <li>Weekly newsletter creation</li>
+                        <li>SEO-optimized articles</li>
+                        <li>Social media content</li>
+                        <li>Content calendar management</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h3>Paid Advertising</h3>
+                    <p>Google Ads, Facebook, Instagram—we build campaigns that generate profitable customers, not just clicks.</p>
+                    <ul class="service-features">
+                        <li>Google Ads management</li>
+                        <li>Facebook & Instagram ads</li>
+                        <li>Retargeting campaigns</li>
+                        <li>Conversion tracking</li>
+                        <li>ROI-focused optimization</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✍️</div>
+                    <h3>Copywriting</h3>
+                    <p>Words that sell. Website copy, ads, emails—we write content that converts browsers into buyers.</p>
+                    <ul class="service-features">
+                        <li>Website copywriting</li>
+                        <li>Sales page creation</li>
+                        <li>Email sequences</li>
+                        <li>Ad copy</li>
+                        <li>Brand messaging</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ai-highlight">
+        <div class="container">
+            <div class="ai-content">
+                <div class="ai-text">
+                    <h2>The Future of Search Is <span>AI</span></h2>
+                    <p>People aren't just typing into Google anymore. They're asking ChatGPT, Claude, and Perplexity for recommendations. If your business isn't optimized for AI search, you're missing the next wave of customers.</p>
+                    <p style="margin-bottom: 30px;">Our GAI service ensures your business is the one AI recommends when potential customers ask for help.</p>
+                    <div class="ai-platforms">
+                        <span class="ai-badge">ChatGPT</span>
+                        <span class="ai-badge">Claude</span>
+                        <span class="ai-badge">Perplexity</span>
+                        <span class="ai-badge">Gemini</span>
+                    </div>
+                </div>
+                <div class="ai-visual">
+                    <div style="background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; border: 1px solid rgba(255,255,255,0.1);">
+                        <div style="background: rgba(6, 182, 212, 0.1); border-left: 4px solid var(--secondary); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <p style="color: #94a3b8; font-size: 14px; margin-bottom: 8px;">User asks ChatGPT:</p>
+                            <p style="color: white; font-size: 16px;">"What's the best [service] near me?"</p>
+                        </div>
+                        <div style="text-align: center; font-size: 30px; margin: 20px 0;">⬇️</div>
+                        <div style="background: rgba(99, 102, 241, 0.2); border: 2px solid var(--primary); padding: 20px; border-radius: 8px;">
+                            <p style="color: #94a3b8; font-size: 14px; margin-bottom: 8px;">ChatGPT recommends:</p>
+                            <p style="color: white; font-size: 18px; font-weight: 700;">YOUR BUSINESS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vsl" class="vsl-section">
+        <div class="container">
+            <div class="vsl-container">
+                <div class="section-header">
+                    <p class="section-tag">See It In Action</p>
+                    <h2 class="section-title">Watch How We Transform Local Businesses</h2>
+                </div>
+                <div class="vsl-box">
+                    <div class="vsl-placeholder">
+                        <div class="play-button">▶</div>
+                        <p style="margin-top: 20px; font-size: 18px;">Click to Watch Video</p>
+                    </div>
+                    <h3 style="font-size: 24px; margin-bottom: 16px;">Your Video Sales Letter Goes Here</h3>
+                    <p style="color: var(--gray); font-size: 16px;">Replace this placeholder with your VSL. A compelling 5-10 minute video that explains your process, showcases results, and drives conversions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">Success Stories</p>
+                <h2 class="section-title">What Our Clients Say</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"We went from invisible on Google to ranking #1 for our main keywords in just 3 months. The AI search optimization is already bringing in new customers who found us through ChatGPT. Incredible ROI."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h4>John Davis</h4>
+                            <p>Owner, Davis Plumbing Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"The website they built converts 3x better than our old one. Combined with their Google Maps optimization, we're getting 40+ qualified leads per month. Best investment we've made."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sarah Mitchell</h4>
+                            <p>Director, Mitchell Dental Clinic</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Finally, an agency that understands local business. Their AI chatbot handles 80% of our customer inquiries automatically. Our team can focus on what they do best."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Michael Rodriguez</h4>
+                            <p>CEO, Rodriguez Law Firm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">Investment</p>
+                <h2 class="section-title">Choose Your Growth Package</h2>
+                <p style="color: var(--gray);">Transparent pricing. No hidden fees. Results guaranteed.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <p class="subtitle">For businesses just getting started</p>
+                    <div class="price">£1,497<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Website optimization</li>
+                        <li>Google Business Profile setup</li>
+                        <li>Basic SEO (5 keywords)</li>
+                        <li>Monthly reporting</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="#contact" class="pricing-cta">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Most Popular</div>
+                    <h3>Growth</h3>
+                    <p class="subtitle">For businesses ready to scale</p>
+                    <div class="price">£2,997<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Everything in Starter, plus:</li>
+                        <li>Full website redesign</li>
+                        <li>Advanced SEO (20 keywords)</li>
+                        <li>Google Maps domination</li>
+                        <li>GAI optimization</li>
+                        <li>Content creation (4 articles/month)</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#contact" class="pricing-cta">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <p class="subtitle">For businesses that want it all</p>
+                    <div class="price">£5,997<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Everything in Growth, plus:</li>
+                        <li>Unlimited SEO keywords</li>
+                        <li>AI chatbot deployment</li>
+                        <li>Paid ad management</li>
+                        <li>Video content creation</li>
+                        <li>Dedicated account manager</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <a href="#contact" class="pricing-cta">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <h2>Ready to Dominate Your Local Market?</h2>
+            <p>Get your free growth audit and discover exactly how we can help you attract more customers, increase revenue, and become the go-to business in your area.</p>
+            <a href="mailto:hello@growthagency.com" class="cta-button">Get Your Free Audit →</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <a href="#">Website Development</a>
+                    <a href="#">SEO</a>
+                    <a href="#">Google Maps</a>
+                    <a href="#">AI Solutions</a>
+                    <a href="#">Paid Ads</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Case Studies</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Careers</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#">Free Audit</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Growth Agency. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
